@@ -1,0 +1,340 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>My Babyyyyy</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,600&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: locked keypad card, then one centered stage: her polaroid and a single Tap me button that blooms a bouquet. */
+:root {
+  --bg: #fff1f3;
+  --bg-2: #ffd9e1;
+  --fg: #3b1220;
+  --muted: #7d4a5b;
+  --accent: #e11d62;
+  --accent-fg: #ffffff;
+  --card: #ffffff;
+  --line: #f4b6c6;
+  --heart: #e11d62;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1d0a13; --bg-2: #33101f; --fg: #ffe9ee; --muted: #d9a3b4;
+    --accent: #ff4d88; --accent-fg: #2a0614; --card: #2a1019; --line: #5a2238; --heart: #ff4d88;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1d0a13; --bg-2: #33101f; --fg: #ffe9ee; --muted: #d9a3b4;
+  --accent: #ff4d88; --accent-fg: #2a0614; --card: #2a1019; --line: #5a2238; --heart: #ff4d88;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  background: radial-gradient(120% 90% at 50% 0%, var(--bg-2), var(--bg) 70%) fixed, var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0;
+  overflow-x: hidden;
+}
+.floaters { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.floaters svg { position: absolute; bottom: -60px; fill: var(--heart); opacity: .2; animation: rise linear infinite; }
+@keyframes rise { to { transform: translateY(-115vh) rotate(18deg); } }
+.stage { position: relative; z-index: 1; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-block: 28px; }
+.card {
+  width: 100%; max-width: 440px; min-width: 0;
+  background: var(--card); border: 1px solid var(--line); border-radius: 28px;
+  padding: 32px 24px 28px; text-align: center;
+  box-shadow: 0 18px 50px -20px color-mix(in srgb, var(--accent) 55%, transparent);
+}
+.big-heart { width: 72px; height: 72px; fill: var(--heart); animation: beat 1.3s ease-in-out infinite; }
+@keyframes beat { 0%,100% { transform: scale(1); } 14% { transform: scale(1.14); } 28% { transform: scale(1); } 42% { transform: scale(1.1); } }
+h1 {
+  font-family: var(--font-display); font-style: italic; font-weight: 600;
+  font-size: clamp(2rem, 9vw, 2.8rem); line-height: 1.1; margin: 16px 0 8px; text-wrap: balance;
+}
+.sub { color: var(--muted); font-size: 1rem; line-height: 1.5; margin: 0 auto 22px; max-width: 32ch; }
+
+/* lock */
+.dots { display: flex; justify-content: center; gap: 14px; margin: 4px 0 22px; }
+.dots i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--accent); background: transparent; transition: background .15s; }
+.dots i.on { background: var(--accent); }
+.dots.shake { animation: shake .4s; }
+@keyframes shake { 20%,60% { transform: translateX(-8px); } 40%,80% { transform: translateX(8px); } }
+.pad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 280px; margin: 0 auto; }
+button {
+  font-family: var(--font-body); font-weight: 700; font-size: 1.35rem; color: var(--fg);
+  background: transparent; border: 1.5px solid var(--line); border-radius: 18px;
+  height: 58px; cursor: pointer; touch-action: manipulation;
+}
+button:active { background: var(--bg-2); }
+button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+button.soft { font-size: .9rem; color: var(--muted); border-color: transparent; }
+.err { min-height: 1.4em; margin-top: 16px; color: var(--accent); font-size: .9rem; }
+
+/* main */
+#main { width: 100%; max-width: 420px; margin: 0 auto; padding-block: 40px 56px; position: relative; z-index: 1; text-align: center; }
+.polaroid {
+  position: relative; width: min(78%, 300px); margin: 0 auto; background: #fff; padding: 12px;
+  border-radius: 6px; transform: rotate(-3deg);
+  box-shadow: 0 24px 40px -18px rgba(60, 10, 30, .55), 0 2px 6px rgba(60, 10, 30, .25);
+}
+.polaroid img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; border-radius: 2px; }
+.polaroid img.cat { object-fit: contain; background: #fff; }
+.polaroid.flip { animation: flip .7s ease both; }
+@keyframes flip { from { transform: rotate(-3deg) rotateY(90deg); } to { transform: rotate(-3deg) rotateY(0); } }
+.polaroid .tape { position: absolute; top: -12px; left: 50%; width: 90px; height: 26px; margin-left: -45px; background: color-mix(in srgb, var(--accent) 35%, #fff); opacity: .8; transform: rotate(3deg); }
+#giftBefore { margin-top: 36px; }
+.tap {
+  height: 64px; padding: 0 44px; border-radius: 999px; font-size: 1.25rem;
+  background: var(--accent); color: var(--accent-fg); border: 2px solid var(--accent);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
+#giftAfter { margin-top: 28px; }
+.bouquet { width: 100%; max-width: 340px; height: auto; display: block; margin: 0 auto 8px; overflow: visible; }
+.bloom { transform-box: fill-box; transform-origin: center; animation: bloom .9s cubic-bezier(.2,1.4,.4,1) both; }
+.stem { stroke-dasharray: 260; animation: grow 1s ease-out both; }
+@keyframes bloom { from { transform: scale(0); opacity: 0; } }
+@keyframes grow { from { stroke-dashoffset: 260; } }
+.gift-msg { font-family: var(--font-display); font-style: italic; font-size: 1.3rem; line-height: 1.4; margin: 6px 0 8px; text-wrap: balance; }
+.gift-from { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin: 0; }
+.watch {
+  display: inline-flex; align-items: center; justify-content: center; margin-top: 22px;
+  min-height: 52px; padding: 12px 26px; border-radius: 999px; text-decoration: none; text-align: center;
+  background: var(--accent); color: var(--accent-fg); font-weight: 700; font-size: 1rem;
+}
+.watch:focus-visible { outline: 3px solid var(--fg); outline-offset: 3px; }
+.confetti { position: fixed; top: -30px; z-index: 6; pointer-events: none; fill: var(--heart); animation: fall linear forwards; }
+@keyframes fall { to { transform: translateY(115vh) rotate(360deg); } }
+.sound {
+  position: fixed; z-index: 5; width: 48px; height: 48px; padding: 0; border-radius: 50%;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  right: max(16px, env(safe-area-inset-right, 0px));
+  background: var(--card); border: 1.5px solid var(--line); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+}
+.sound svg { width: 22px; height: 22px; fill: currentColor; }
+.sound .off { display: none; }
+.sound[aria-pressed="false"] .on { display: none; }
+.sound[aria-pressed="false"] .off { display: block; }
+.music {
+  position: fixed; z-index: 5;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 16px);
+  right: max(16px, env(safe-area-inset-right, 0px));
+  height: 44px; padding: 0 16px; font-size: .9rem;
+  background: var(--card); border: 1.5px solid var(--line); border-radius: 999px;
+}
+.hidden { display: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .floaters svg, .big-heart, .dots.shake, .tap, .bloom, .stem, .confetti { animation: none; }
+  .floaters { display: none; }
+}
+</style>
+
+<div class="floaters" id="floaters" aria-hidden="true"></div>
+
+<main class="stage" id="lock">
+  <section class="card">
+    <svg class="big-heart" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.7 5 6.1 5c2 0 3.5 1.1 4.4 2.6l1.5 2.2 1.5-2.2C14.4 6.1 15.9 5 17.9 5c3.4 0 5.2 3.4 3.7 6.8C19.5 16.4 12 21 12 21z"/></svg>
+    <h1>Just for you</h1>
+    <p class="sub">Enter our code to open it.</p>
+    <div class="dots" id="dots" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="pad" id="pad"></div>
+    <div class="err" id="err" role="status" aria-live="polite"></div>
+  </section>
+</main>
+
+<article id="main" class="hidden">
+  <figure class="polaroid" style="margin-block: 0;">
+    <span class="tape" aria-hidden="true"></span>
+    <img id="pic" class="cat" src="cat.jpg" alt="A cute cat holding a pink flower">
+  </figure>
+
+  <div id="giftBefore">
+    <button type="button" class="tap" id="tap">Tap me</button>
+  </div>
+  <div id="giftAfter" class="hidden">
+    <svg class="bouquet" id="bouquet" viewBox="0 0 300 320" role="img" aria-label="A big bouquet of pink and red flowers"></svg>
+    <p class="gift-msg">I couldn't give you these in real life, so I thought I'd give them to you virtually.</p>
+    <p class="gift-msg">For my baby Veeeee</p>
+    <p class="gift-from">From Stephen 🥹🫶💐</p>
+    <a class="watch" href="https://www.instagram.com/reel/DeystZSu2Fb/?lqvp=MWo0MHNnMDAzMHRxYg==" target="_blank" rel="noopener">One more surprise: tap to watch</a>
+  </div>
+  <audio id="song" src="song.mp3" preload="auto" playsinline></audio>
+  <button type="button" class="music" id="music" aria-pressed="true">Music: on</button>
+</article>
+
+<script>
+(function () {
+  var CODE = '0224';
+  var HEART = '<path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 2.7 5 6.1 5c2 0 3.5 1.1 4.4 2.6l1.5 2.2 1.5-2.2C14.4 6.1 15.9 5 17.9 5c3.4 0 5.2 3.4 3.7 6.8C19.5 16.4 12 21 12 21z"/>';
+  var NS = 'http://www.w3.org/2000/svg';
+  function heart(size) {
+    var s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24');
+    s.setAttribute('width', size); s.setAttribute('height', size);
+    s.innerHTML = HEART;
+    return s;
+  }
+  var fl = document.getElementById('floaters');
+  for (var i = 0; i < 16; i++) {
+    var h = heart(14 + Math.random() * 34);
+    h.style.left = (Math.random() * 100) + '%';
+    h.style.animationDuration = (9 + Math.random() * 12) + 's';
+    h.style.animationDelay = (-Math.random() * 20) + 's';
+    fl.appendChild(h);
+  }
+
+  // bouquet
+  var bq = document.getElementById('bouquet');
+  function svgEl(name, attrs) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    return e;
+  }
+  function buildBouquet() {
+    var base = { x: 150, y: 300 };
+    var flowers = [
+      { x: 150, y: 80,  r: 54, c: '#ff5c8a', d: .35 },
+      { x: 88,  y: 130, r: 44, c: '#ff8fb1', d: .5 },
+      { x: 212, y: 130, r: 44, c: '#e11d62', d: .6 },
+      { x: 52,  y: 192, r: 34, c: '#ffb3c7', d: .75 },
+      { x: 248, y: 192, r: 34, c: '#ff5c8a', d: .85 },
+      { x: 120, y: 200, r: 36, c: '#ffc2d4', d: .95 },
+      { x: 182, y: 205, r: 36, c: '#ff7aa2', d: 1.05 }
+    ];
+    flowers.forEach(function (f, i) {
+      var mx = (f.x + base.x) / 2 + (i % 2 ? 14 : -14);
+      var p = svgEl('path', { d: 'M ' + f.x + ' ' + (f.y + f.r * .4) + ' Q ' + mx + ' ' + ((f.y + base.y) / 2) + ' ' + base.x + ' ' + base.y, stroke: '#2f9e58', 'stroke-width': 5, fill: 'none', 'stroke-linecap': 'round', 'class': 'stem' });
+      p.style.animationDelay = (f.d * .6) + 's';
+      bq.appendChild(p);
+    });
+    [[96, 250, -30], [204, 250, 30], [120, 232, -12], [180, 232, 12]].forEach(function (l, i) {
+      var leaf = svgEl('ellipse', { cx: l[0], cy: l[1], rx: 11, ry: 26, fill: '#3fb86b', transform: 'rotate(' + l[2] + ' ' + l[0] + ' ' + l[1] + ')', 'class': 'bloom' });
+      leaf.style.animationDelay = (.2 + i * .1) + 's';
+      bq.appendChild(leaf);
+    });
+    flowers.forEach(function (f) {
+      var g = svgEl('g', { 'class': 'bloom' });
+      g.style.animationDelay = f.d + 's';
+      for (var i = 0; i < 9; i++) {
+        g.appendChild(svgEl('ellipse', { cx: f.x, cy: f.y - f.r * .55, rx: f.r * .36, ry: f.r * .58, fill: f.c, stroke: 'rgba(120,10,50,.18)', 'stroke-width': 1, transform: 'rotate(' + (i * 40) + ' ' + f.x + ' ' + f.y + ')' }));
+      }
+      g.appendChild(svgEl('circle', { cx: f.x, cy: f.y, r: f.r * .3, fill: '#ffd166' }));
+      g.appendChild(svgEl('circle', { cx: f.x, cy: f.y, r: f.r * .14, fill: '#f59e0b' }));
+      bq.appendChild(g);
+    });
+    var rb = svgEl('g', { 'class': 'bloom' });
+    rb.style.animationDelay = '1.2s';
+    rb.appendChild(svgEl('path', { d: 'M 150 262 L 118 244 L 118 276 Z', fill: '#e11d62' }));
+    rb.appendChild(svgEl('path', { d: 'M 150 262 L 182 244 L 182 276 Z', fill: '#e11d62' }));
+    rb.appendChild(svgEl('circle', { cx: 150, cy: 262, r: 9, fill: '#b3124a' }));
+    bq.appendChild(rb);
+  }
+  document.getElementById('tap').addEventListener('click', function () {
+    var pic = document.getElementById('pic');
+    pic.className = '';
+    pic.src = 'her.jpg';
+    pic.alt = 'My girl, smiling at the camera';
+    var pol = pic.parentNode;
+    pol.classList.remove('flip'); void pol.offsetWidth; pol.classList.add('flip');
+    document.getElementById('giftBefore').classList.add('hidden');
+    document.getElementById('giftAfter').classList.remove('hidden');
+    buildBouquet();
+    for (var i = 0; i < 36; i++) {
+      var c = heart(16 + Math.random() * 24);
+      c.setAttribute('class', 'confetti');
+      c.style.left = (Math.random() * 100) + 'vw';
+      c.style.animationDuration = (2.5 + Math.random() * 3) + 's';
+      c.style.animationDelay = (Math.random() * 1.5) + 's';
+      document.body.appendChild(c);
+      setTimeout((function (el) { return function () { el.remove(); }; })(c), 8000);
+    }
+    try { document.getElementById('giftAfter').scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+  });
+
+  // background song (the file already starts at 2:55 of the original)
+  var song = document.getElementById('song');
+  var musicBtn = document.getElementById('music');
+  var wanted = true;
+  function playSong() {
+    if (!wanted) return;
+    try {
+      song.volume = 0.9;
+      var p = song.play();
+      if (p && p.catch) p.catch(function () { musicBtn.textContent = 'Music: tap to play'; });
+    } catch (e) {}
+  }
+  song.addEventListener('ended', function () {
+    musicBtn.textContent = 'Play again';
+    musicBtn.setAttribute('aria-pressed', 'false');
+  });
+  musicBtn.addEventListener('click', function () {
+    if (song.ended) { song.currentTime = 0; }
+    if (song.paused) { wanted = true; playSong(); musicBtn.textContent = 'Music: on'; musicBtn.setAttribute('aria-pressed', 'true'); }
+    else { wanted = false; song.pause(); musicBtn.textContent = 'Music: off'; musicBtn.setAttribute('aria-pressed', 'false'); }
+  });
+
+  // backup: if the phone blocked autoplay, the first tap anywhere starts it
+  song.addEventListener('error', function () { musicBtn.textContent = 'Music unavailable'; });
+  document.addEventListener('pointerdown', function (e) {
+    if (document.getElementById('main').classList.contains('hidden')) return;
+    if (e.target === musicBtn) return;
+    if (wanted && song.paused && !song.ended) {
+      playSong();
+      musicBtn.textContent = 'Music: on';
+      musicBtn.setAttribute('aria-pressed', 'true');
+    }
+  });
+
+  // keypad
+  var entered = '';
+  var dots = document.querySelectorAll('#dots i');
+  var err = document.getElementById('err');
+  var dotsWrap = document.getElementById('dots');
+  function render() {
+    for (var i = 0; i < dots.length; i++) dots[i].className = i < entered.length ? 'on' : '';
+  }
+  function check() {
+    if (entered === CODE) {
+      document.getElementById('lock').classList.add('hidden');
+      document.getElementById('main').classList.remove('hidden');
+      try { window.scrollTo(0, 0); } catch (e) {}
+      playSong();
+    } else {
+      err.textContent = 'Not quite. Try again, my love.';
+      dotsWrap.classList.remove('shake'); void dotsWrap.offsetWidth; dotsWrap.classList.add('shake');
+      entered = ''; render();
+    }
+  }
+  function press(k) {
+    err.textContent = '';
+    if (k === 'del') { entered = entered.slice(0, -1); render(); return; }
+    if (entered.length >= 4) return;
+    entered += k; render();
+    if (entered.length === 4) { if (entered === CODE) playSong(); setTimeout(check, 150); }
+  }
+  var pad = document.getElementById('pad');
+  ['1','2','3','4','5','6','7','8','9','','0','del'].forEach(function (k) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    if (k === '') { b.style.visibility = 'hidden'; b.tabIndex = -1; b.setAttribute('aria-hidden', 'true'); }
+    else if (k === 'del') { b.textContent = 'Delete'; b.className = 'soft'; b.setAttribute('aria-label', 'Delete last digit'); }
+    else { b.textContent = k; }
+    b.addEventListener('click', function () { if (k !== '') press(k); });
+    pad.appendChild(b);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (document.getElementById('lock').classList.contains('hidden')) return;
+    if (/^[0-9]$/.test(e.key)) press(e.key);
+    else if (e.key === 'Backspace') press('del');
+  });
+})();
+</script>
+
+</body></html>
